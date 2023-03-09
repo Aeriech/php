@@ -1,33 +1,42 @@
 <?php
+$valid_username = "Aeriech";
+$valid_password = "12345";
+$error_message = "";
 
-$x = 96 ;
-$x = 69;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $username = $_POST["username"];
+  $password = $_POST["password"];
 
-const Hi ='Hello';
-
-define('Paid', 'paid');
-echo "Hello World <br/>";
-echo Hi.' I '.Paid." $x <br/>";
-
-function sum($x, $y){
-    return $x + $y;
+  if ($username == $valid_username && $password == $valid_password) {
+    // Redirect to the game page
+    header("Location: MyDiary.php");
+    exit();
+  } else {
+    $error_message = "Invalid username or password";
+  }
 }
-
-echo "Sum:".sum(69,88)."<br/>";
-
-$Add = sum(60,9)."<br/>";
-
-echo $Add;
-
-$isComplete = 0;
-
-if ($isComplete){
-    echo "TRUE";
-}
-else{
-    echo "FALSE";
-}
-
 ?>
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+</head>
+<body>
+  <h1>Login Form</h1>
 
+  <?php if (!empty($error_message)): ?>
+    <p style="color: red;"><?php echo $error_message; ?></p>
+  <?php endif; ?>
+
+  <form method="POST">
+    <label for="username">Username:</label>
+    <input type="text" name="username" required><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" required><br><br>
+
+    <input type="submit" value="Log in">
+  </form>
+</body>
+</html>
